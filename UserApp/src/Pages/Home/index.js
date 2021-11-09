@@ -7,7 +7,7 @@ export default function Home({navigation}) {
     const { setToken } = useContext(AuthContext);
 
     function alterarDados() {
-        //navigation.navigate("AlterarDados");
+        navigation.navigate("AlterarDados");
     }
 
     function sair() {

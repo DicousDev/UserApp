@@ -6,6 +6,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./src/Pages/Login";
 import Cadastro from "./src/Pages/Cadastro";
 import Home from "./src/Pages/Home";
+import AlterarDados from "./src/Pages/AlterarDados";
+
+
 import AuthContext from "./src/Context/AuthContext";
 
 const Stack = createStackNavigator();
@@ -28,6 +31,10 @@ const Context = () => {
                         options={{
                             headerLeft: null
                         }}
+                    />
+                    <Stack.Screen
+                        name="AlterarDados"
+                        component={AlterarDados}
                     />
                 </Stack.Navigator>
             </NavigationContainer>
