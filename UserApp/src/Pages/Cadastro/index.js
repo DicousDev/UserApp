@@ -1,13 +1,19 @@
-import React, { useContext } from 'react';
-import {View, Text} from "react-native";
-import { AuthContext } from '../../Context/AuthContext';
+import React from 'react';
+import {View, Text, TextInput} from "react-native";
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Cadastro({ navigation }) {
-    const { token } = useContext(AuthContext);
 
     return (
         <View>
-            <Text>Cadastro {token}</Text>
+            <Text>Cadastro</Text>
+            <TextInput placeholder="NAME"/>
+            <TextInput placeholder="EMAIL"/>
+            <TextInput placeholder="SENHA"/>
+            <TextInput placeholder="CONFIRMAR SENHA"/>
+            <TouchableOpacity onPress={() => {navigation.navigate("Login")}}>
+                <Text>Cadastrar</Text>
+            </TouchableOpacity>
         </View>
     )
 }
