@@ -62,7 +62,6 @@ export default function Cadastro({ navigation }) {
 
     return (
         <View>
-            <Text>{alert}</Text>
             <Text>Cadastro</Text>
             <TextInput placeholder="NAME" value={nome} onChangeText={setNome}/>
             <TextInput placeholder="EMAIL" value={email} onChangeText={setEmail}/>
