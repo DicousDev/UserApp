@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import axios from "axios";
 
 export default function Cadastro({ navigation }) {
-    const [alert, setAlert] = useState("Alert");
+    const [alert, setAlert] = useState("");
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
@@ -12,8 +12,8 @@ export default function Cadastro({ navigation }) {
 
     function cadastrar() {
         if(nome === "" || email === "" || senha === "" || confirmarSenha === "") {
-            setAlert("Preencha todos os campos.");
-            return console.log("Preencha todos os campos.")
+            setAlert("Todos os campos são obrigatórios");
+            return;
         }
 
         if(senha !== confirmarSenha) {
@@ -41,9 +41,7 @@ export default function Cadastro({ navigation }) {
             console.log("Cadastro realizado.");
         })
         .catch((error) => {
-            setAlert("Error no servidor.");
-            console.log(error);
-            console.log("Erro ao tentar cadastrar usuário.");
+            setAlert(error.response.data.mensagem);
         })
     }
 
@@ -62,11 +60,17 @@ export default function Cadastro({ navigation }) {
 
     return (
         <View>
-            <Text>Cadastro</Text>
+            {
+                alert.length > 0 &&
+                    <View style={{backgroundColor: "#ED4337", alignItems: 'center', paddingVertical: 5}}>
+                        <Text style={{color: "white"}}>{alert}</Text>
+                    </View>
+            }
+
             <TextInput placeholder="NAME" value={nome} onChangeText={setNome}/>
             <TextInput placeholder="EMAIL" value={email} onChangeText={setEmail}/>
-            <TextInput placeholder="SENHA" value={senha} onChangeText={setSenha}/>
-            <TextInput placeholder="CONFIRMAR SENHA" value={confirmarSenha} onChangeText={setConfirmarSenha}/>
+            <TextInput placeholder="SENHA" value={senha} onChangeText={setSenha} secureTextEntry={true}/>
+            <TextInput placeholder="CONFIRMAR SENHA" value={confirmarSenha} onChangeText={setConfirmarSenha} secureTextEntry={true}/>
             <TouchableOpacity onPress={() => {cadastrar()}}>
                 <Text>Cadastrar</Text>
             </TouchableOpacity>

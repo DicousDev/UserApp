@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import {View, Text, TouchableOpacity, TextInput} from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
 import { AuthContext } from '../../Context/AuthContext';
@@ -14,7 +13,7 @@ export default function Login({navigation}) {
 
     function login() {
         if(email === "" || senha === "") {
-            setAlert("Preencha todos os campos.");
+            setAlert("Todos os campos são obrigatórios");
             return;
         }
 
@@ -36,7 +35,7 @@ export default function Login({navigation}) {
             home();
         })
         .catch((error) => {
-            setAlert("Usuário não encontrado.");
+            setAlert("Email ou senha inválidos");
             console.log("Usuário não encontrado.");
         })
     }
@@ -60,10 +59,14 @@ export default function Login({navigation}) {
 
     return ( 
         <View>
-            <Text>Teste: {alert}</Text>
-            <Text>Login</Text>
+            {
+                alert.length > 0 &&
+                    <View style={{backgroundColor: "#ED4337", alignItems: 'center', paddingVertical: 5}}>
+                        <Text style={{color: "white"}}>{alert}</Text>
+                    </View>
+            }
             <TextInput placeholder="EMAIL" value={email} onChangeText={setEmail}/>
-            <TextInput placeholder="SENHA"value={senha} onChangeText={setSenha}/>
+            <TextInput placeholder="SENHA"value={senha} onChangeText={setSenha} secureTextEntry={true}/>
             <TouchableOpacity onPress={() => {login()}}>
                 <Text>Entrar</Text>
             </TouchableOpacity>

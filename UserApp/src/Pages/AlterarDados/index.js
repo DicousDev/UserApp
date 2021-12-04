@@ -38,7 +38,8 @@ export default function AlterarDados({navigation}) {
             }
         })
         .then((response) => {
-            setAlert("Conta atualizado com sucesso.");
+            setAlert("Conta atualizada com sucesso");
+            console.log("Conta atualizada com sucesso");
             voltar();
         })
         .catch((error) => {
@@ -59,9 +60,14 @@ export default function AlterarDados({navigation}) {
 
     return (
         <View>
-            <Text>{alert}</Text>
-            <TextInput placeholder="SENHA" value={senha} onChangeText={setSenha}/>
-            <TextInput placeholder="CONFIRMAR SENHA" value={confirmarSenha} onChangeText={setConfirmarSenha}/>
+            {
+                alert.length > 0 &&
+                    <View style={{backgroundColor: "#ED4337", alignItems: 'center', paddingVertical: 5}}>
+                        <Text style={{color: "white"}}>{alert}</Text>
+                    </View>
+            }
+            <TextInput placeholder="SENHA" value={senha} onChangeText={setSenha} secureTextEntry={true}/>
+            <TextInput placeholder="CONFIRMAR SENHA" value={confirmarSenha} onChangeText={setConfirmarSenha} secureTextEntry={true}/>
 
             <TouchableOpacity onPress={() => {alterar()}}>
                 <Text>Salvar</Text>
